@@ -22,6 +22,7 @@ class Contact {
 	protected $user_id=0;
 	protected $address_id=0;
 	protected $name;
+	protected $email;
 	protected $gender='';
 	protected $birthdate='';
 	protected $birthplace='';
