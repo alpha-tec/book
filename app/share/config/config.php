@@ -26,5 +26,6 @@
 	define('HOSTNAME', 'localhost');
 
 	define('WEBAPP_NAME', 'Clube do Livro');
+	define('WEBAPP_DESCRIPTION', 'Clube do Livro - Instituto Alpha Lumen');
 
 ?>
