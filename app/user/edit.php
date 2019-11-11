@@ -1,31 +1,7 @@
 <?php
 	include("share/login-secure.php");
 
-    
-    $username = $_SESSION['ulogin'];
-    $password = $_SESSION['upaswd'];
-    $user_id = $_SESSION['user_id'];
-    $profile_id = $_SESSION['profile_id'];
-    $email = $_SESSION['email'];
-    $contact_id = $_SESSION['contact_id'];
-    $fullname = $_SESSION['fullname'];
-    $name = $_SESSION['name'];
-
-    $acesso   =    User::getInstance();
-    $contato  = Contact::getInstance();
-    $endereco = Address::getInstance();
-
-    $acesso->setSaveId($contact_id);
-    $contato->setSaveId($contact_id);
-    $endereco->setSaveId($contact_id);
-
-    $acesso->setLogin($username);
-    $acesso->setPassword($password);
-    if(!$acesso->passwordCheck() )
-        header("Location: login.php");
-
     $linkHome = $menu->getPageNumber('home/welcome.php');
-
 
     $lista1 = $acesso->select("id={$user_id}");
     $lista1 = (object) $lista1[0];
