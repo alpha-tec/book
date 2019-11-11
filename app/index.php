@@ -42,7 +42,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo WEBAPP_NAME; ?></title>
-    <meta name="description" content="Clube do Livro - Instituto Alpha Lumen">
+    <meta name="description" content=" <?php echo WEBAPP_DESCRIPTION; ?> ">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
