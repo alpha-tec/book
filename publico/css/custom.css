@@ -1,0 +1,22 @@
+/* your styles go here */
+
+
+/*body {
+    color: #739FD4;
+    background-color: #1491FF;
+}
+*/
+
+
+#background {
+
+    background: url(../../publico/img/projeto/banner/ial-background3.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;    
+
+   /* opacity: 0.1;    banner3-transp.jpg
+    filter:alpha(opacity=1);  */
+}
+
