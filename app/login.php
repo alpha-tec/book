@@ -12,6 +12,7 @@
     );
 
     $acesso = User::getInstance();
+    $contato = Contact::getInstance();
 
 ?>
 
@@ -116,9 +117,15 @@
                                         $_SESSION['user_id']   = $record->id;
                                         $_SESSION['profile_id']= $record->profile_id;
                                         $_SESSION['email']     = $record->email;
-                                        $_SESSION['timestamp'] = time();
                                         
-                                        //print_r($record);
+                                        $lista = $acesso->select("id={$record->id}");
+                                        $lista = (object) $lista[0];
+
+                                        $_SESSION['contact_id'] = $lista1->id;
+                                        $_SESSION['fullname'] = $lista1->name;
+                                        $_SESSION['name'] = $record->name;
+                                    
+                                        $_SESSION['timestamp'] = time();
                                         
                                         if( $record->mustChangePassword == 'Y')
                                             header("Location: change.php");
