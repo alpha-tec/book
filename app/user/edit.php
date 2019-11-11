@@ -7,9 +7,9 @@
     $user_id = $_SESSION['user_id'];
     $profile_id = $_SESSION['profile_id'];
     $email = $_SESSION['email'];
-    $contact_id = $lista1->id;
-    $fullname = $lista1->name;
-    $name = $record->name;
+    $contact_id = $_SESSION['contact_id'];
+    $fullname = $_SESSION['fullname'];
+    $name = $_SESSION['name'];
 
     $acesso   =    User::getInstance();
     $contato  = Contact::getInstance();
