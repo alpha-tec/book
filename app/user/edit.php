@@ -1,18 +1,23 @@
 <?php
+	include("share/login-secure.php");
+
+    
     $username = $_SESSION['ulogin'];
     $password = $_SESSION['upaswd'];
     $user_id = $_SESSION['user_id'];
     $profile_id = $_SESSION['profile_id'];
     $email = $_SESSION['email'];
-    $_SESSION['timestamp'] = time();
+    $contact_id = $lista1->id;
+    $fullname = $lista1->name;
+    $name = $record->name;
 
     $acesso   =    User::getInstance();
     $contato  = Contact::getInstance();
     $endereco = Address::getInstance();
 
-    $acesso->setSaveId($user_id);
-    $contato->setSaveId($user_id);
-    $endereco->setSaveId($user_id);
+    $acesso->setSaveId($contact_id);
+    $contato->setSaveId($contact_id);
+    $endereco->setSaveId($contact_id);
 
     $acesso->setLogin($username);
     $acesso->setPassword($password);
@@ -26,7 +31,7 @@
     $lista1 = (object) $lista1[0];
     $acesso->setId($lista1->id);
 
-    $lista2 = $contato->select("user_id={$user_id}");
+    $lista2 = $contato->select("id={$contact_id}");
     $lista2 = (object) $lista2[0];
     $contato->setId($lista2->id);
     $contato->setUserId($lista2->user_id);
@@ -41,11 +46,6 @@
     $endereco->setId($id);
 
     $number_focus = 0;
-    /*
-    echo '<pre>';
-    echo print_r($_POST);
-    echo '</pre>';
-    */
     
 ?>
 <div class="breadcrumb-holder">
