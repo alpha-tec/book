@@ -121,8 +121,8 @@
                                         $lista = $acesso->select("id={$record->id}");
                                         $lista = (object) $lista[0];
 
-                                        $_SESSION['contact_id'] = $lista1->id;
-                                        $_SESSION['fullname'] = $lista1->name;
+                                        $_SESSION['contact_id'] = $lista->id;
+                                        $_SESSION['fullname'] = $lista->name;
                                         $_SESSION['name'] = $record->name;
                                     
                                         $_SESSION['timestamp'] = time();
