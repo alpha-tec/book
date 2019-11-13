@@ -97,7 +97,7 @@
                 <div class="form-inner dashboard-counts" style = "width:100%" >
 
                     <div class="logo text-uppercase">
-                        <img src="../publico/img/projeto/ial.png" alt="ial360" class="img-fluid pb-3" width="200" height="100">
+                        <img src="../publico/img/projeto/<?=DEF_IMAGE ?>" alt="ial" class="img-fluid pb-3" width="200" height="100">
                         <!--    <strong class="text-primary">Plataforma ial360&#176;</strong> -->
                     </div>
 
@@ -118,6 +118,7 @@
                                 $email = $_POST['inEmail'];
 
                                 $lista = $acesso->select("email='{$email}'");
+                                if(count($lista) > 0){
                                 $lista = (object) $lista[0];
 
                                 $acesso->setId($lista->id);
@@ -149,6 +150,12 @@
                                     echo "Erro de reset de senha! Por favor tente novamente.";
                                     echo '</div>';                            
                                 }
+                            }else{
+                                echo '<div class="alert alert-danger alert-dismissible fade show text-left" role="alert">';
+                                echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                                echo "Usuário inexistente! Por favor crie um novo usuário.";
+                                echo '</div>';                            
+                            }
                             }else{
                                 echo '<div class="alert alert-danger alert-dismissible fade show text-left" role="alert">';
                                 echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';

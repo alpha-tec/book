@@ -78,7 +78,7 @@
                 <div class="form-inner dashboard-counts" style = "width:100%" >
 
                     <div class="logo text-uppercase">
-                        <img src="../publico/img/projeto/ial.png" alt="ial360" class="img-fluid pb-3" width="200" height="100">
+                        <img src="../publico/img/projeto/<?=DEF_IMAGE ?>" alt="ial" class="img-fluid pb-3" width="200" height="100">
                         <!--    <strong class="text-primary">Plataforma ial360&#176;</strong> -->
                     </div>
                     <h3 class="card-title text-uppercase text-center">L O G I N</h3> 
@@ -118,7 +118,7 @@
                                         $_SESSION['profile_id']= $record->profile_id;
                                         $_SESSION['email']     = $record->email;
                                         
-                                        $lista = $acesso->select("id={$record->id}");
+                                        $lista = $contato->select("user_id={$record->id}");
                                         $lista = (object) $lista[0];
 
                                         $_SESSION['contact_id'] = $lista->id;
@@ -127,6 +127,7 @@
                                     
                                         $_SESSION['timestamp'] = time();
                                         
+                                        unset($_POST['upasswd']);
                                         if( $record->mustChangePassword == 'Y')
                                             header("Location: change.php");
                                         else 

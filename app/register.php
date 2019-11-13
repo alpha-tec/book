@@ -81,7 +81,7 @@
                 <div class="form-inner dashboard-counts" style = "width:100%" >
 
                     <div class="logo text-uppercase">
-                        <img src="../publico/img/projeto/ial.png" alt="ial360" class="img-fluid pb-3" width="200" height="100">
+                        <img src="../publico/img/projeto/<?=DEF_IMAGE ?>" alt="ial" class="img-fluid pb-3" width="200" height="100">
                         <!--    <strong class="text-primary">Plataforma ial360&#176;</strong> -->
                     </div>
         
@@ -112,10 +112,10 @@
                                     $acesso->setLogin($login);
                                     $acesso->setEmail($email);
 
-                                    $acesso->setProfileId(20);
+                                    $acesso->setProfileId(PROFILE_DEFAULT); //profile extern_user
                                     $passwd = $acesso->codeGenerate(8);
                                     $acesso->setPassword($passwd);
-
+                                    $acesso->setMustChangePassword('Y');
                                     $exist = $acesso->selectAll("email='{$email}' AND name LIKE '%".mb_strtolower(substr( $name, 0, strpos($name, " ")), 'UTF-8')."%'");
                                     $erro = true;
                                     if(count($exist) > 0)
@@ -136,6 +136,8 @@
                                     {
                                         $user = $acesso->insert();
                                         $login = $acesso->getLogin();
+                                        $acesso->setMustUpdateContact('Y');
+
                                         if(count($user) > 0){
                                             $contato->setName($name);
                                             $contato->setEmail($email);
