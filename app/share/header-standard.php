@@ -8,6 +8,7 @@
 
     define('VCLASSES', 'share/classes/');
     define('VCONFIG', 'share/config/');
+    define('DEF_IMAGE', 'ial.png');
 
     spl_autoload_register(function($class) {
         include VCLASSES.$class.'.php';

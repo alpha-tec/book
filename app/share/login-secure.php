@@ -32,5 +32,4 @@
     if(!$acesso->passwordCheck() )
         header("Location: login.php");
 
-
 ?>
