@@ -28,4 +28,5 @@
 	define('WEBAPP_NAME', 'Clube do Livro');
 	define('WEBAPP_DESCRIPTION', 'Clube do Livro - Instituto Alpha Lumen');
 
+	define('PROFILE_DEFAULT', 21) //criação de usuário via web utiliza um perfil pré-definido 'extern_user'
 ?>
