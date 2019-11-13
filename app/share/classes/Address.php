@@ -173,7 +173,7 @@ class Address {
     {
 		$this->crud->setTablename($this->table);
 
-        $array = array('postal_code' => $this->postal_code, 'address' => $this->name, 'number' => $this->number, 'complement' => $this->complement, 'neighborhood' => $this->neighborhood, 'city' => $this->city, 'state' => $this->state, 'country' => $this->country, 'description' => $this->description, 'active' => $this->active, 'modifiedby' => $this->save_id, );
+        $array = array('postal_code' => $this->postal_code, 'name' => $this->name, 'number' => $this->number, 'complement' => $this->complement, 'neighborhood' => $this->neighborhood, 'city' => $this->city, 'state' => $this->state, 'country' => $this->country, 'description' => $this->description, 'active' => $this->active, 'modifiedby' => $this->save_id, );
 
         $condition = array('id=' => $this->id);  
 

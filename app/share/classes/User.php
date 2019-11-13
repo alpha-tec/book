@@ -27,7 +27,7 @@ class User {
     protected $login;
     protected $password;
     protected $email;
-    protected $mustChangePassord='N';
+    protected $mustChangePassword='N';
     protected $mustUpdateContact='N';
 
     protected $active='Y';
@@ -161,7 +161,7 @@ class User {
     {
 		$this->crud->setTablename($this->table);
 
-        $array = array('profile_id' => $this->profile_id, 'name' => $this->name, 'login' => $this->login, 'password' => $this->passwordCrypt($this->password), 'email' => $this->email, 'mustChangePassord' => $this->mustChangePassord, 'mustUpdateContact' => $this->mustUpdateContact, 'active' => $this->active, 'modifiedby' => $this->save_id, );
+        $array = array('profile_id' => $this->profile_id, 'name' => $this->name, 'login' => $this->login, 'password' => $this->passwordCrypt($this->password), 'email' => $this->email, 'mustChangePassword' => $this->mustChangePassword, 'mustUpdateContact' => $this->mustUpdateContact, 'active' => $this->active, 'modifiedby' => $this->save_id, );
 
         $condition = array('id=' => $this->id);  
 
