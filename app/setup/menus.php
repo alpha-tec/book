@@ -6,8 +6,6 @@
     $estrutura_menu = Menu::getInstance();
     $estrutura_menu->setSaveId($contact_id);
 
-    $lista = $estrutura_menu->selectAll('1 ORDER BY sequence, num ');
-
 ?>
 
 <!-- Breadcrumb-->
@@ -28,16 +26,10 @@
             <div class="form-group col-sm-4 col-lg-2">
                 <label class="form-control-label "><strong>Tipo</strong></label>
                 <select name="inType" data-msg="Informe o tipo da escola" class="form-control form-control-sm " >
-                    <option value="" >Todos </option>
-                    <option value="'A'"  >Particular </option>
-                    <option value="'B','C'" >Pública </option>
-                </select>
-            </div>
-
-            <div class="form-group col-sm-4 col-lg-2">
-                <label class="form-control-label "><strong>Etapa no Processo</strong></label>
-                <select name="inEtapa" data-msg="Informe a etapa no processo" class="form-control form-control-sm " >
-                    <option value=""  >Todos </option>
+                    <option value=" 1 " >Todos </option>
+                    <option value=" num in (0, 1)" >Soente Menus </option>
+                    <option value=" num>2 AND CHAR_LENGTH(menu_label)>1 " >Somente Submenu </option>
+                    <option value=" num>2 AND menu_label IS NULL " >Somente Páginas </option>
                 </select>
             </div>
 
@@ -63,23 +55,25 @@
                 <thead class="thead-dark">
                     <tr>
                         <th class="text-center">#</th>
-                        <th class="text-center">id</th>
-                        <th class="text-center">Seq</th>
-                        <th class="text-center">Num</th>
-                        <th class="text-center">Label</th>
-                        <th class="text-center">Icon</th>  
-                        <th class="text-center">Tooltip</th> 
-                        <th class="text-center">Folder</th>
-                        <th class="text-center">Page</th>
-                        <th class="text-center">Active</th>
-                        <th class="text-center">Created</th>
-                        <th class="text-center">Created By</th>
-                        <th class="text-center">Modified</th>
-                        <th class="text-center">Modified By</th>
+                        <th class="text-center">Ação</th>
+                        <th class="text-center">Sequência</th>
+                        <th class="text-center">Ordem</th>
+                        <th class="text-center">Menu</th>
+                        <th class="text-center">Ícone</th>  
+                        <th class="text-center">Dica</th> 
+                        <th class="text-center">Pasta</th>
+                        <th class="text-center">Página</th>
+                        <th class="text-center">Ativo</th>
+                        <th class="text-center">Criado</th>
+                        <th class="text-center">Modificado</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
+                        $where = '1 ORDER BY sequence, num ';
+                        if(isset($_POST['inType']))
+                            $where = $_POST['inType'].'ORDER BY sequence, num';
+                        $lista = $estrutura_menu->selectAll($where);
                         foreach($lista as $key => $value){
                             $value = (object) $value;
 
@@ -126,15 +120,7 @@
                             echo ' </td> ';
 
                             echo ' <td class="text-center"> ';
-                            echo $value->created;
-                            echo ' </td> ';
-
-                            echo ' <td class="text-center"> ';
                             echo $value->createdby;
-                            echo ' </td> ';
-
-                            echo ' <td class="text-center"> ';
-                            echo $value->modified;
                             echo ' </td> ';
 
                             echo ' <td class="text-center"> ';
