@@ -23,7 +23,7 @@
 
         <div class="row mt-1">
 
-            <div class="form-group col-sm-4 col-lg-2">
+            <div class="form-group col-sm-4 col-md-3 col-lg-2">
                 <label class="form-control-label "><strong>Tipo</strong></label>
                 <select name="inType" data-msg="Informe o tipo da escola" class="form-control form-control-sm " >
                     <option value=" 1 " >Todos </option>
@@ -33,16 +33,20 @@
                 </select>
             </div>
 
-            <div class="form-group col-sm-4 col-lg-2">
+            <div class="form-group col-sm-3 col-lg-2">
                 <label class="form-control-label "><strong>Status</strong></label>
                 <select name="inStatus" data-msg="Informe o status no processo" class="form-control form-control-sm " >
                     <option value="Y" >Ativo</option>
-                    <option value="N" >Inativo (Desistiu ou Não Passou)</option>
+                    <option value="N" >Inativo</option>
                 </select>
             </div>
 
-            <div class="form-group col-sm-4 col-lg-2">
-                <button class="btn btn-sm btn-info mt-3 mr-2" name="pesquisar" value="10" type="submit" data-toggle="tooltip" data-placement="top" title="Pesquisar"><i class="fa fa-search"></i>Pesquisar</button>
+            <div class="form-group col-sm-2 col-lg-1">
+                <button class="btn btn-sm btn-info mt-3" name="pesquisar" value="10" type="submit" data-toggle="tooltip" data-placement="top" title="Pesquisar"><i class="fa fa-search"></i> Pesquisar</button>
+            </div>
+
+            <div class="form-group col-sm-2 col-lg-2">
+                <button class="btn btn-sm btn-success ml-4 mt-3" name="criar" value="10" type="submit" data-toggle="tooltip" data-placement="top" title="Criar novo item"><i class="fas fa-plus"></i> Criar</button>
             </div>
 
         </div>
