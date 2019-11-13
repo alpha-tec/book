@@ -43,7 +43,6 @@
                                        echo "<p>Senha alterada com sucesso!.</p>";
                                        echo "</div>";                                
                                     }
-
                                 } else {
                                     echo "<div class='alert alert-danger alert-dismissible fade show text-left' role='alert'>";
                                     echo "<button type='button' class='close' data-dismiss='alert'>&times;</button>";
@@ -73,7 +72,7 @@
 
                         <div class="form-group col-sm-12">
                            <label class="form-control-label">Login</label>
-                           <input name="ulogin" type="text" readonly data-msg="" class="form-control form-control-sm" value="<?php echo $lista->login;?>" readonly >
+                           <input name="login" type="text" readonly data-msg="" class="form-control form-control-sm" value="<?php echo $lista->login;?>" readonly >
                         </div>
 
                         <div class="form-group col-sm-12">
