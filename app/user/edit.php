@@ -100,7 +100,7 @@
 
                 if( isset($_POST['inAddress']) ){
                     $endereco->setName($_POST['inAddress']);
-                    $lista3->address = $_POST['inAddress'];
+                    $lista3->name = $_POST['inAddress'];
                 }
 
                 if( isset($_POST['inNeighborhood']) ){
