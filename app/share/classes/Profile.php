@@ -89,7 +89,7 @@ class Profile {
     {  
         if(!isset(self::$profile)) {
             try {   
-               self::$profileu = new Profile();
+               self::$profile = new Profile();
             } catch (Exception $e) {
                echo "Erro: ".$e->getMessage();
             }   
