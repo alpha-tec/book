@@ -38,6 +38,8 @@ class Contact {
 	protected $createdby;
 	protected $modified;
 	protected $modifiedby;
+	protected $house_number;
+	protected $address_complement;
 
 	private function __construct(){   
 		$this->pdo = Connection::getInstance();  
@@ -166,6 +168,18 @@ class Contact {
 	public function getModifiedBy() {
 		return $this->modifiedby;
 	}
+	public function setHouseNumber( $var ) {
+		$this->house_number = $var;
+	}
+	public function getHouseNumber() {
+		return $this->house_number;
+	}
+	public function setAddressComplement( $var ) {
+		$this->address_complement = $var;
+	}
+	public function getAddressComplement() {
+		return $this->address_complement;
+	}
 
 	
 	public function insertQuick()
@@ -193,7 +207,7 @@ class Contact {
 	{
 		$this->crud->setTablename($this->table);
 
-		$array = array('user_id'=> $this->user_id, 'address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_emissor'=> $this->rg_emissor, 'cpf'=> $this->cpf, 'active'=> $this->active, 'createdby'=> $this->save_id, );
+		$array = array('user_id'=> $this->user_id, 'address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_emissor'=> $this->rg_emissor, 'cpf'=> $this->cpf, 'active'=> $this->active, 'createdby'=> $this->save_id, 'house_number'=> $this->house_number, 'address_complement'=> $this->address_complement);
 		
 		$id = array();
         $result = $this->crud->insert($array);
@@ -214,7 +228,7 @@ class Contact {
 	{
 		$this->crud->setTablename($this->table);
 
-		$array = array('user_id'=> $this->user_id, 'address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_emissor'=> $this->rg_emissor, 'cpf'=> $this->cpf, 'active'=> $this->active, 'modifiedby'=> $this->save_id, );
+		$array = array('user_id'=> $this->user_id, 'address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_emissor'=> $this->rg_emissor, 'cpf'=> $this->cpf, 'active'=> $this->active, 'modifiedby'=> $this->save_id, 'house_number'=> $this->house_number, 'address_complement'=> $this->address_complement);
 		  
 		$arrayCond = array('id=' => $this->id);
 	  
