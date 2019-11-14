@@ -239,7 +239,7 @@
                                     echo "<p>CPF inválido! Por favor preencha com um número válido.</p>";
                                     echo '</div>';
                                 }else{
-                                    $resultado = $endereco->select("postal_code = '{$lista3->postal_code}' AND name='{$lista3->name}' AND neighborhood='{$lista3->neighborhood}' AND city='{$lista3->city}' AND state='{$lista3->state}' AND country='{$lista3->country}' ");
+                                    $resultado = $endereco->select("postal_code = '{$lista3->postal_code}' AND name='{$lista3->name}' AND number='{$lista3->number}'  AND neighborhood='{$lista3->neighborhood}' AND city='{$lista3->city}' AND state='{$lista3->state}' AND country='{$lista3->country}' ");
 
                                     if(count($resultado) > 0){
                                         $resultado = (object)$resultado[0];
