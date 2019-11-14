@@ -33,6 +33,10 @@ class Contact {
 	protected $cpf='';
 	protected $marital_status='';
 	protected $deceased='N';
+
+	protected $address_number='';
+	protected $address_complement='';
+
 	protected $active='Y';
 	protected $created;
 	protected $createdby;
@@ -136,6 +140,32 @@ class Contact {
 	public function getCPF() {
 		return $this->cpf;
 	}
+	public function setMaritalStatus( $var ) {
+		$this->marital_status = $var;
+	}
+	public function getMaritalStatus() {
+		return $this->marital_status;
+	}
+	public function setDeceased( $var ) {
+		$this->deceased = $var;
+	}
+	public function getDeceased() {
+		return $this->deceased;
+	}
+
+	public function setAddressNumber( $var ) {
+		$this->address_number = $var;
+	}
+	public function getAddressNumber() {
+		return $this->address_number;
+	}
+	public function setAddressComplement( $var ) {
+		$this->address_complement = $var;
+	}
+	public function getAddressComplement() {
+		return $this->address_complement;
+	}
+
 	public function setActive( $var ) {
 		$this->active = $var;
 	}
@@ -193,7 +223,7 @@ class Contact {
 	{
 		$this->crud->setTablename($this->table);
 
-		$array = array('user_id'=> $this->user_id, 'address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_emissor'=> $this->rg_emissor, 'cpf'=> $this->cpf, 'active'=> $this->active, 'createdby'=> $this->save_id, );
+		$array = array('user_id'=> $this->user_id, 'address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_emissor'=> $this->rg_emissor, 'cpf'=> $this->cpf, 'marital_status'=> $this->marital_status, 'deceased'=>$this->deceased, 'address_number'=> $this->address_number, 'address_complement'=> $this->address_complement, 'active'=> $this->active, 'createdby'=> $this->save_id, );
 		
 		$id = array();
         $result = $this->crud->insert($array);
@@ -214,7 +244,7 @@ class Contact {
 	{
 		$this->crud->setTablename($this->table);
 
-		$array = array('user_id'=> $this->user_id, 'address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_emissor'=> $this->rg_emissor, 'cpf'=> $this->cpf, 'active'=> $this->active, 'modifiedby'=> $this->save_id, );
+		$array = array('user_id'=> $this->user_id, 'address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_emissor'=> $this->rg_emissor, 'cpf'=> $this->cpf, 'marital_status'=> $this->marital_status, 'address_number'=> $this->address_number, 'address_complement'=> $this->address_complement, 'active'=> $this->active, 'modifiedby'=> $this->save_id, );
 		  
 		$arrayCond = array('id=' => $this->id);
 	  

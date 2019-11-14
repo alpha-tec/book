@@ -24,8 +24,6 @@ class Address {
     protected $id;
     protected $postal_code='';
     protected $name='';
-    protected $number='';
-    protected $complement='';
     protected $neighborhood='';
     protected $city='';
     protected $state='';
@@ -58,18 +56,6 @@ class Address {
     }
     public function getName() {
         return $this->name;
-    }
-    public function setNumber( $var ) {
-        $this->number =  $var;
-    }
-    public function getNumber() {
-        return $this->number;
-    }
-    public function setComplement( $var ) {
-        $this->complement = mb_strtoupper($var, 'UTF-8');
-    }
-    public function getComplement() {
-        return $this->complement;
     }
     public function setNeighborhood( $var ) {
         $this->neighborhood = mb_strtoupper($var, 'UTF-8');
@@ -159,7 +145,7 @@ class Address {
     {
 		$this->crud->setTablename($this->table);
 
-        $array = array('postal_code' => $this->postal_code, 'name' => $this->name, 'number' => $this->number, 'complement' => $this->complement, 'neighborhood' => $this->neighborhood, 'city' => $this->city, 'state' => $this->state, 'country' => $this->country, 'description' => $this->description, 'createdby' => $this->save_id, );
+        $array = array('postal_code' => $this->postal_code, 'name' => $this->name, 'neighborhood' => $this->neighborhood, 'city' => $this->city, 'state' => $this->state, 'country' => $this->country, 'description' => $this->description, 'createdby' => $this->save_id, );
         
         $result = $this->crud->insert($array);
         if($result){
@@ -173,7 +159,7 @@ class Address {
     {
 		$this->crud->setTablename($this->table);
 
-        $array = array('postal_code' => $this->postal_code, 'name' => $this->name, 'number' => $this->number, 'complement' => $this->complement, 'neighborhood' => $this->neighborhood, 'city' => $this->city, 'state' => $this->state, 'country' => $this->country, 'description' => $this->description, 'active' => $this->active, 'modifiedby' => $this->save_id, );
+        $array = array('postal_code' => $this->postal_code, 'name' => $this->name, 'neighborhood' => $this->neighborhood, 'city' => $this->city, 'state' => $this->state, 'country' => $this->country, 'description' => $this->description, 'active' => $this->active, 'modifiedby' => $this->save_id, );
 
         $condition = array('id=' => $this->id);  
 
@@ -219,9 +205,9 @@ class Address {
        {  
           parse_str($resultado, $tmpretorno);
           
-          $busca[] = ['postal_code' => $cep, 'name' => utf8_encode(htmlentities($tmpretorno['tipo_logradouro'], NULL, 'ISO-8859-1' ).' '.htmlentities($tmpretorno['logradouro'], NULL, 'ISO-8859-1' )), 'number' => '', 'complement' => '', 'neighborhood' => utf8_encode(htmlentities($tmpretorno['bairro'], NULL, 'ISO-8859-1' )), 'city' => utf8_encode(htmlentities($tmpretorno['cidade'], NULL, 'ISO-8859-1' )), 'state' => $tmpretorno['uf'], 'country' => 'BRASIL', ];
+          $busca[] = ['postal_code' => $cep, 'name' => utf8_encode(htmlentities($tmpretorno['tipo_logradouro'], NULL, 'ISO-8859-1' ).' '.htmlentities($tmpretorno['logradouro'], NULL, 'ISO-8859-1' )), 'neighborhood' => utf8_encode(htmlentities($tmpretorno['bairro'], NULL, 'ISO-8859-1' )), 'city' => utf8_encode(htmlentities($tmpretorno['cidade'], NULL, 'ISO-8859-1' )), 'state' => $tmpretorno['uf'], 'country' => 'BRASIL', ];
        } else
-            $busca[] = ['postal_code' => $cep, 'name' => '', 'number' => '', 'complement' => '', 'neighborhood' => '', 'city' => '', 'state' => '', 'country' => 'BRASIL', ];
+            $busca[] = ['postal_code' => $cep, 'name' => '', 'neighborhood' => '', 'city' => '', 'state' => '', 'country' => 'BRASIL', ];
 
         return $busca;
     }

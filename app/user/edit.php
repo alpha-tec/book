@@ -109,13 +109,13 @@
                 }
 
                 if( isset($_POST['inNumber']) ){
-                    $endereco->setNumber($_POST['inNumber']);
-                    $lista3->number = $_POST['inNumber'];
+                    $contato->setAddressNumber($_POST['inNumber']);
+                    $lista2->address_number = $_POST['inNumber'];
                 }
 
                 if( isset($_POST['inComplement']) ){
-                    $endereco->setComplement($_POST['inComplement']);
-                    $lista3->complement = $_POST['inComplement'];
+                    $contato->setAddressComplement($_POST['inComplement']);
+                    $lista2->address_complement = $_POST['inComplement'];
                 }
 
                 if( isset($_POST['inCity']) ){
@@ -199,12 +199,12 @@
 
                     <div class=" form-group col-sm-2 ">
                         <label class="form-control-label col-form-label col-12 pl-0 ">Número</label>
-                        <input name="inNumber" type="text" placeholder="" data-msg="Número" class="form-control form-control-sm " aria-label="Default" value="<?php if($id > 0) echo $lista3->number; ?>" <?php if($number_focus == 1) echo ' autofocus ';?> required>
+                        <input name="inNumber" type="text" placeholder="" data-msg="Número" class="form-control form-control-sm " aria-label="Default" value="<?php if($id > 0) echo $lista2->address_number; ?>" <?php if($number_focus == 1) echo ' autofocus ';?> required>
                     </div>
 
                     <div class=" form-group col-sm-4 ">
                         <label class="form-control-label col-form-label col-12 pl-0 ">Complemento</label>
-                        <input name="inComplement" type="text" placeholder="Complemento (EX. APTO 71)" class="form-control form-control-sm " aria-label="Default" style="text-transform:uppercase" value="<?php if($id > 0) echo $lista3->complement; ?>">
+                        <input name="inComplement" type="text" placeholder="Complemento (EX. APTO 71)" class="form-control form-control-sm " aria-label="Default" style="text-transform:uppercase" value="<?php if($id > 0) echo $lista2->address_complement; ?>">
                     </div>
 
                     <div class=" form-group col-sm-8 ">

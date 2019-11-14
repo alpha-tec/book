@@ -166,7 +166,7 @@
                                     $lista2->email = $_POST['inEmail'];
                                 }
 
-                                $lista3 = ['postal_code'=>'', 'name'=>'', 'number'=>'', 'complement'=>'', 'neighborhood'=>'', 'city'=>'', 'state'=>'', 'country'=>'', ];
+                                $lista3 = ['postal_code'=>'', 'name'=>'', 'neighborhood'=>'', 'city'=>'', 'state'=>'', 'country'=>'', ];
                                 $lista3 = (object) $lista3;
 
                                 if( isset($_POST['inPostalCode']) ){
@@ -186,19 +186,19 @@
                                 }
 
                                 if( isset($_POST['inNumber']) ){
-                                    $endereco->setNumber($_POST['inNumber']);
-                                    $lista3->number = $_POST['inNumber'];
+                                    $contato->setAddressNumber($_POST['inNumber']);
+                                    $lista2->address_number = $_POST['inNumber'];
                                 }else{
-                                    $endereco->setNumber('');
-                                    $lista3->number = '';
+                                    $contato->setAddressNumber('');
+                                    $lista2->address_number = '';
                                 }
 
                                 if( isset($_POST['inComplement']) ){
-                                        $endereco->setComplement($_POST['inComplement']);
-                                        $lista3->complement = $_POST['inComplement'];
+                                        $contato->setAddressComplement($_POST['inComplement']);
+                                        $lista2->address_complement = $_POST['inComplement'];
                                 }else{
-                                    $endereco->setComplement('');
-                                    $lista3->complement = '';
+                                    $contato->setAddressComplement('');
+                                    $lista2->address_complement = '';
                                 }
 
                                 if( isset($_POST['inNeighborhood']) ){
@@ -239,7 +239,7 @@
                                     echo "<p>CPF inválido! Por favor preencha com um número válido.</p>";
                                     echo '</div>';
                                 }else{
-                                    $resultado = $endereco->select("postal_code = '{$lista3->postal_code}' AND name='{$lista3->name}' AND number='{$lista3->number}'  AND neighborhood='{$lista3->neighborhood}' AND city='{$lista3->city}' AND state='{$lista3->state}' AND country='{$lista3->country}' ");
+                                    $resultado = $endereco->select("postal_code = '{$lista3->postal_code}' AND name='{$lista3->name}' AND neighborhood='{$lista3->neighborhood}' AND city='{$lista3->city}' AND state='{$lista3->state}' AND country='{$lista3->country}' ");
 
                                     if(count($resultado) > 0){
                                         $resultado = (object)$resultado[0];
@@ -305,12 +305,12 @@
 
                             <div class=" form-group col-sm-3 ">
                                 <label class="form-control-label col-12 pl-0 ">Número</label>
-                                <input name="inNumber" type="text" placeholder="" data-msg="Número" class="form-control form-control-sm " aria-label="Default" value="<?php if($end_record) echo $lista3->number; ?>" <?php if($number_focus == 1) echo ' autofocus ';?> required>
+                                <input name="inNumber" type="text" placeholder="" data-msg="Número" class="form-control form-control-sm " aria-label="Default" value="<?php if($end_record) echo $lista2->address_number; ?>" <?php if($number_focus == 1) echo ' autofocus ';?> required>
                             </div>
 
                             <div class=" form-group col-sm-6 ">
                                 <label class="form-control-label col-12 pl-0 ">Complemento</label>
-                                <input name="inComplement" type="text" placeholder="Complemento (EX. APTO 71)" class="form-control form-control-sm " aria-label="Default" style="text-transform:uppercase" value="<?php if($end_record) echo $lista3->complement; ?>">
+                                <input name="inComplement" type="text" placeholder="Complemento (EX. APTO 71)" class="form-control form-control-sm " aria-label="Default" style="text-transform:uppercase" value="<?php if($end_record) echo $lista2->address_complement; ?>">
                             </div>
 
                             <div class=" form-group col-sm-8 ">
