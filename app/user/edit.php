@@ -109,8 +109,8 @@
                 }
 
                 if( isset($_POST['inNumber']) ){
-                    $contato->setHouseNumber($_POST['inNumber']);
-                    $lista2->house_number = $_POST['inNumber'];
+                    $contato->setAddressNumber($_POST['inNumber']);
+                    $lista2->address_number = $_POST['inNumber'];
                 }
 
                 if( isset($_POST['inComplement']) ){
@@ -199,7 +199,7 @@
 
                     <div class=" form-group col-sm-2 ">
                         <label class="form-control-label col-form-label col-12 pl-0 ">Número</label>
-                        <input name="inNumber" type="text" placeholder="" data-msg="Número" class="form-control form-control-sm " aria-label="Default" value="<?php if($id > 0) echo $lista2->house_number; ?>" <?php if($number_focus == 1) echo ' autofocus ';?> required>
+                        <input name="inNumber" type="text" placeholder="" data-msg="Número" class="form-control form-control-sm " aria-label="Default" value="<?php if($id > 0) echo $lista2->address_number; ?>" <?php if($number_focus == 1) echo ' autofocus ';?> required>
                     </div>
 
                     <div class=" form-group col-sm-4 ">
