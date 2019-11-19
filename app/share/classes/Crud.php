@@ -204,7 +204,7 @@ class Crud {
 		try {   
 			// Atribui a instrução SQL construida no método   
 			$sql = $this->buildDelete($conditions);   
-	
+			//echo $sql;
 			// Passa a instrução para o PDO   
 			$stm = $this->pdo->prepare($sql);   
 	
