@@ -2,6 +2,7 @@
 	include("share/login-secure.php");
 
     $linkHome = $menu->getPageNumber('home/welcome.php');
+    $linkProfileMenus = $menu->getPageNumber('setup/profile-menus.php');
 
     $estrutura_perfil = Profile::getInstance();
     $estrutura_perfil->setSaveId($contact_id);
@@ -18,35 +19,84 @@
 </div>
 
 <form class="form form-validate"  method="post" action="">
-    <section class="forms" >
+    <section class="forms form-inline" >
         <div class="container-fluid " >
 
-            <div class="row mt-1">
+            <div class="row mt-2">
 
-                <div class="form-group col-sm-3 col-lg-2">
-                    <label class="form-control-label "><strong>Status</strong></label>
+                <div class="form-group col-sm-5 col-md-4 col-lg-3 col-xl-2">
+                    <label class="form-control-label mr-2"><strong>Status</strong></label>
                     <select name="inStatus" data-msg="Informe o status no processo" class="form-control form-control-sm " >
                         <option value="Y" >Ativo</option>
                         <option value="N" >Inativo</option>
                     </select>
                 </div>
 
-                <div class="form-group col-sm-2 col-lg-1">
-                    <button class="btn btn-sm btn-info mt-3" name="pesquisar" value="10" type="submit" data-toggle="tooltip" data-placement="top" title="Pesquisar"><i class="fa fa-search"></i> Pesquisar</button>
-                </div>
+                <div class="form-group col-sm-7 col-md-6 col-lg-4 col-xl-3 mt-1 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
+                    <button class="btn btn-sm btn-info " name="pesquisar" value="10" type="submit" data-toggle="tooltip" data-placement="top" title="Pesquisar"><i class="fa fa-search"></i> Pesquisar</button>
 
-                <div class="form-group col-sm-2 col-lg-2">
-                    <button class="btn btn-sm btn-success ml-4 mt-3" name="criar" value="10" type="submit" data-toggle="tooltip" data-placement="top" title="Criar novo item"><i class="fas fa-plus"></i> Criar</button>
+                    <span title="Criar um novo item" data-toggle="tooltip" data-placement="top"><button type="button" class="btn btn-sm btn-success ml-2" aria-hidden="true" data-toggle="modal" data-target="#addProfile" ><i class="fas fa-plus"></i> Novo Item</button></span>
                 </div>
 
             </div>
-            <hr class="my-2">
+            <hr class="my-3">
+            <?php
+                if(isset($_POST['addProfile'])){
 
+                    if(isset($_POST['inSequence']))
+                        $estrutura_menu->setSequence($_POST['inSequence']);
+                    if(isset($_POST['inNumber']))
+                        $estrutura_menu->setNum($_POST['inNumber']);
+                    if(isset($_POST['inFolder']))
+                        $estrutura_menu->setFolder($_POST['inFolder']);
+                    if(isset($_POST['inPage']))
+                        $estrutura_menu->setPageName($_POST['inPage']);
+                    if(isset($_POST['inMenu']))
+                        $estrutura_menu->setMenuLabel($_POST['inMenu']);
+                    if(isset($_POST['inIcon']))
+                        $estrutura_menu->setIcon($_POST['inIcon']);
+                    if(isset($_POST['inTooltip']))
+                        $estrutura_menu->setTooltip($_POST['inTooltip']);
 
+                    if($estrutura_menu->insert() > 0){
+                        echo '<div class="alert alert-success alert-dismissible fade show text-left" role="alert">';
+                        echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                        echo "Novo item adicionado!";
+                        echo '</div>';
+                    }
+                    else
+                    {
+                        echo '<div class="alert alert-danger alert-dismissible fade show text-left" role="alert">';
+                        echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                        echo "Erro na criação! Tente novamente.";
+                        echo '</div>';
+                    }
+                }
+                if(isset($_POST['delMenu'])){
+                    $estrutura_menu->setId($_POST['delMenu']);
+                    
+                    if($estrutura_menu->delete() > 0){
+                        echo '<div class="alert alert-success alert-dismissible fade show text-left" role="alert">';
+                        echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                        echo "Item foi apagado com sucesso!";
+                        echo '</div>';
+                    }
+                    else
+                    {
+                        echo '<div class="alert alert-danger alert-dismissible fade show text-left" role="alert">';
+                        echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                        echo "Erro na remoção! Tente novamente.";
+                        echo '</div>';
+                    }
+
+                }
+
+            ?>
             <table id="example" class="table table-sm table-striped table-bordered" style="width:100%" > 
                 <thead class="thead-dark">
                     <tr>
                         <th class="text-center">#</th>
+                        <th class="text-center">ID</th>
                         <th class="text-center">Ação</th>
                         <th class="text-center">Nome</th>
                         <th class="text-center">Nome Completo</th>
@@ -69,12 +119,19 @@
                             echo ' </td> ';
 
                             echo ' <td class="text-center"> ';
+                            echo $value->id;
+                            echo ' </td> ';
 
-                            echo ' <span title="Editar Perfil" data-toggle="tooltip" data-placement="top"><button type="button" class="btn btn-sm btn-info " aria-hidden="true" data-toggle="modal" data-target="#editMenu" ><i class="fas fa-edit"></i> </button></span> ';
+                            echo ' <td class="text-center"> ';
 
-                            echo '<button type="button" class="btn btn-sm btn-danger ml-2 " data-toggle="tooltip" data-placement="top" title="Desativar este perfil"><i class="fas fa-times"></i> </button>';
+                            echo ' <span title="Editar Perfil" data-toggle="tooltip" data-placement="top"><button type="button" class="btn btn-sm btn-info " aria-hidden="true" data-toggle="modal" data-target="#editProfile" data-whateverid="'.$value->id.'" data-whateverstatus="'.$value->active.'" data-whateverprofile="'.$value->fullname.'" data-whatevershortname="'.$value->name.'" ><i class="fas fa-edit"></i> </button></span> ';
+                            
+                            echo '<span title="Editar Menus" data-toggle="tooltip" data-placement="top"><a class="btn btn-sm btn-secondary ml-2" href="index.php?link='.$linkProfileMenus.'&id='.$value->id.'" target="_blank"><i class="fas fa-bars"></i></a></span>';
 
-                            //echo $value->id;
+                            //echo '<button type="button" class="btn btn-sm btn-danger ml-2 " data-toggle="tooltip" data-placement="top" title="Desativar este perfil"> </button>';
+
+                            echo '<button class="btn btn-sm btn-danger ml-2" name="delProfile" value="'.$value->id.'" type="submit" data-toggle="tooltip" data-placement="top" title="Apagar perfil" onclick="return confirm(\' Tem certeza que quer APAGAR o perfil <'.$value->fullname.'> (#'.$value->id.') ?\');"><i class="fas fa-times"></i></button>';
+
                             echo ' </td> ';
 
                             echo ' <td class="text-center"> ';
@@ -113,5 +170,95 @@
 </form>
 
 
+<!-- Modal Adicionar Perfil -->
+<div  class="modal fade text-left" id="addProfile" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " role="document" >
+        <div class="modal-content">
+
+            <form class="form form-validate"  method="post" action="#div_view">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Novo Item</h4>
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-sm-7">
+                            <label class="form-control-label form-control-label-sm"><strong>Perfil</strong></label>
+                            <input name="inProfile" id="inProfile" type="text" data-msg="Nome do Perfil" class="form-control form-control-sm" value="" required >
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label class="form-control-label form-control-label-sm"><strong>Abreviação</strong></label>
+                            <input name="inSortName" id="inSortName" type="text" data-msg="Abreviação do Perfil" class="form-control form-control-sm" value="" required >
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-warning"><i class="fas fa-times" aria-hidden="true"></i> Cancelar</button>
+                    <button name="addProfile" type="submit" class="btn btn-primary ml-3 md-3" value="create" ><i class="fas fa-plus" aria-hidden="true"></i> Criar</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Adicionar Menu -->
+<div  class="modal fade text-left" id="editProfile" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " role="document" >
+        <div class="modal-content">
+
+            <form class="form form-validate"  method="post" action="#div_view">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar Item</h4>
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-sm-3">
+                            <label class="form-control-label form-control-label-sm">ID</label>
+                            <input name="inId" id="inId" type="number" data-msg="Sequência do menu" class="form-control form-control-sm" value="" readonly>
+                        </div>
+                        <div class="form-group col-md-4 ">
+                            <label class="form-control-label">Status</label>
+                            <select name="inStatus" id="inStatus" class="form-control form-control-sm " data-msg="Status do item" required>
+                                <option></option>
+                                <option value='Y'>Ativo</option>
+                                <option value='N'>Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-7">
+                            <label class="form-control-label form-control-label-sm">Perfil</label>
+                            <input name="inProfile" id="inProfile" type="text" data-msg="Nome do Perfil" class="form-control form-control-sm" value="" >
+                        </div>
+
+                        <div class="form-group col-sm-5">
+                            <label class="form-control-label form-control-label-sm">Abreviação</label>
+                            <input name="inShortName" id="inShortName" type="text" data-msg="Abreviação do Perfil" class="form-control form-control-sm" value="" >
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-warning"><i class="fas fa-times" aria-hidden="true"></i> Cancelar</button>
+                    <button name="editProfile" type="submit" class="btn btn-primary ml-3 md-3" value="create" ><i class="fas fa-check" aria-hidden="true"></i> Salvar</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
 
 
