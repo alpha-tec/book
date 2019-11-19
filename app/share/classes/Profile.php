@@ -129,6 +129,18 @@ class Profile {
 
         return $this->crud->update($array, $condition); 
     }
+
+    public function delete()
+    {
+		$this->crud->setTablename($this->table);
+
+        if($this->id == 0)
+            return 0;
+
+        $condition = array('id=' => $this->id, );
+  
+        return $this->crud->delete($condition);
+    }
      
     public function selectAll($c=NULL)
     {
