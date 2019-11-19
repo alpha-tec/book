@@ -15,6 +15,8 @@ class ProfileMenu {
     private static $profile_menu;  
  
     protected $table = 'ialbooks.sys_profile_menus';
+    protected $table_profile = 'ialbooks.sys_profiles';
+    protected $table_menu = 'ialbooks.sys_menus';
     protected $save_id=0;
 
     //table columns
@@ -145,6 +147,15 @@ class ProfileMenu {
         return $this->crud->update($array, $condition); 
     }
      
+    public function delete()
+    {
+		$this->crud->setTablename($this->table);
+
+        $condition = array('id=' => $this->id);  
+
+        return $this->crud->delete($condition); 
+    }
+     
     public function selectAll($c=NULL)
     {
         $conditions = "";
@@ -165,6 +176,14 @@ class ProfileMenu {
         
         $sql = "SELECT * FROM {$this->table} {$conditions} LIMIT 1";
         
+        return $this->crud->getSQLGeneric($sql, NULL, TRUE);
+    }
+
+    public function selectMenus($c=NULL)
+    {
+
+        $sql = "SELECT * FROM {$this->table} a, {$this->table_profile} b, {$this->table_menu} c WHERE a.profile_id = b.id AND a.menu_id = c.id {$c} ";
+
         return $this->crud->getSQLGeneric($sql, NULL, TRUE);
     }
 
