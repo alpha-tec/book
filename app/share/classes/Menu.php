@@ -22,8 +22,8 @@ class Menu {
     protected $sequence;
     protected $num;
     protected $menu_label;
-    protected $icon;
-    protected $tooltip;
+    protected $icon='';
+    protected $tooltip='';
     protected $folder;
     protected $page_name;
 
@@ -143,7 +143,7 @@ class Menu {
 
         $array = array('sequence'=> $this->sequence, 'num'=> $this->num, 'menu_label'=> $this->menu_label, 'icon'=> $this->icon, 'tooltip'=> $this->tooltip, 'folder'=> $this->folder, 'page_name'=> $this->page_name, 'createdby' => $this->save_id, );
 
-        $id = 0;
+        print_r($array);
         $result = $this->crud->insert($array);
 
         if($result){
@@ -163,6 +163,18 @@ class Menu {
         $condition = array('id=' => $this->id);  
 
         return $this->crud->update($array, $condition); 
+    }
+
+    public function delete()
+    {
+		$this->crud->setTablename($this->table);
+
+        if($this->id == 0)
+            return 0;
+
+        $condition = array('id=' => $this->id, );
+  
+        return $this->crud->delete($condition);
     }
      
     public function selectAll($c=NULL)
