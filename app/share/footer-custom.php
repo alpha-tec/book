@@ -81,15 +81,14 @@
         });
 </script>
 
-<script>
-    $('#editSchoolModal').on('show.bs.modal', function (event) { 
+<script> //MODAL
+    $('#editProfile').on('show.bs.modal', function (event) { 
         var button = $(event.relatedTarget) 
-        var recipientSchoolId = button.data('whateverid') 
+        var recipientId = button.data('whateverid') 
 
         var recipientStatus = button.data('whateverstatus')
-        var recipientName = button.data('whatevername')
-        var recipientType = button.data('whatevertype')
-        var recipientUnit = button.data('whateverunit')
+        var recipientProfile = button.data('whateverprofile')
+        var recipientShortName = button.data('whatevershortname')
 
         var modal = $(this) 
 
@@ -98,12 +97,42 @@
         //else
         //    echo " modal.find('#inActive').prop('checked', false) ";
 
-        modal.find('#inSchoolId').val(recipientSchoolId)
+        modal.find('#inId').val(recipientId)
         modal.find('#inStatus').val(recipientStatus)
-        modal.find('#inSchoolName').val(recipientName) 
-        modal.find('#inType').val(recipientType)
-        modal.find('#inUnit').val(recipientUnit)
+        modal.find('#inProfile').val(recipientProfile) 
+        modal.find('#inShortName').val(recipientShortName)
     })
+
+    $('#editMenu').on('show.bs.modal', function (event) { 
+        var button = $(event.relatedTarget) 
+        var recipientId = button.data('whateverid') 
+        var recipientStatus = button.data('whateverstatus')
+        var recipientSequence = button.data('whateversequence')
+        var recipientNumber = button.data('whatevernumber')
+        var recipientFolder = button.data('whateverfolder') 
+        var recipientPage = button.data('whateverpage') 
+        var recipientLabel = button.data('whateverlabel') 
+        var recipientIcon = button.data('whatevericon') 
+        var recipientTooltip = button.data('whatevertooltip') 
+
+        var modal = $(this) 
+
+        //if($lista->recipientActive == 'Y')
+        //    echo " modal.find('#inActive').prop('checked', true) ";
+        //else
+        //    echo " modal.find('#inActive').prop('checked', false) ";
+
+        modal.find('#inId').val(recipientId)
+        modal.find('#inStatus').val(recipientStatus)
+        modal.find('#inSequence').val(recipientSequence)
+        modal.find('#inNumber').val(recipientNumber)
+        modal.find('#inFolder').val(recipientFolder)
+        modal.find('#inPage').val(recipientPage)
+        modal.find('#inLabel').val(recipientLabel)
+        modal.find('#inIcon').val(recipientIcon)
+        modal.find('#inTooltip').val(recipientTooltip)
+    })
+
 </script>
 
 
