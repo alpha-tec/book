@@ -117,7 +117,6 @@
             
                 <thead class="thead-dark">
                     <tr>
-                        <th class="text-center">#</th>
                         <th class="text-center">ID</th>
                         <th class="text-center">Ação</th>
                         <th class="text-center">Sequência</th>
@@ -128,8 +127,6 @@
                         <th class="text-center">Menu</th>
                         <th class="text-center">Dica</th> 
                         <th class="text-center">Ativo</th>
-                        <th class="text-center">Criado</th>
-                        <th class="text-center">Modificado</th>
                     </tr>
                 </thead>
 
@@ -147,22 +144,16 @@
                             echo ' <tr> ';
 
                             echo ' <td class="text-center"> ';
-                            echo ($key+1);
-                            echo ' </td> ';
-
-                            echo ' <td class="text-center"> ';
                             echo $value->id;
                             echo ' </td> ';
 
                             echo ' <td class="text-center"> ';
 
-                            echo ' <span title="Editar Menu" data-toggle="tooltip" data-placement="top"><button type="button" class="btn btn-sm btn-info " aria-hidden="true" data-toggle="modal" data-target="#editMenu" data-whateverid="'.$value->id.'" data-whateverstatus="'.$value->active.'" data-whateversequence="'.$value->sequence.'" data-whatevernumber="'.$value->num.'" data-whateverfolder="'.$value->folder.'" data-whateverpage="'.$value->page_name.'" data-whateverlabel="'.$value->menu_label.'" data-whatevericon="'.$value->icon.'" data-whatevertooltip="'.$value->tooltip.'" ><i class="fas fa-edit"></i> </button></span> ';
+                            echo '<button type="button" class="btn btn-sm btn-secondary " data-toggle="tooltip" data-placement="top" title="Mover para baixo"><i class="fas fa-arrow-down"></i> </button>';
 
-                            //echo '<button type="button" class="btn btn-sm btn-warning ml-2 " data-toggle="tooltip" data-placement="top" title="Mover para baixo"><i class="fas fa-arrow-down"></i> </button>';
+                            echo '<button type="button" class="btn btn-sm btn-secondary ml-2 " data-toggle="tooltip" data-placement="top" title="Mover para cima"><i class="fas fa-arrow-up"></i> </button>';
 
-                            //echo '<button type="button" class="btn btn-sm btn-warning ml-2 " data-toggle="tooltip" data-placement="top" title="Mover para cima"><i class="fas fa-arrow-up"></i> </button>';
-
-                            echo '<button class="btn btn-sm btn-danger ml-2" name="delMenu" value="'.$value->id.'" type="submit" data-toggle="tooltip" data-placement="top" title="Apagar registro" onclick="return confirm(\' Tem certeza que quer APAGAR a página <'.$value->folder.' / '.$value->page_name.'> (#'.$value->id.') ?\');"><i class="fas fa-times"></i></button>';
+                            echo '<button class="btn btn-sm btn-danger ml-2" name="delMenu" value="'.$value->id.'" type="submit" data-toggle="tooltip" data-placement="top" title="Remover o item do perfil" onclick="return confirm(\' Tem certeza que quer REMOVER a página #'.$value->id.' <'.$value->folder.' / '.$value->page_name.'> do perfil ?\');"><i class="fas fa-times"></i></button>';
 
                             echo ' </td> ';
 
@@ -197,19 +188,6 @@
                             echo ' <td class="text-center"> ';
                             echo $value->active;
                             echo ' </td> ';
-
-                            echo ' <td class="text-center"> ';
-                            echo $value->createdby;
-                            echo ' </td> ';
-
-                            echo ' <td class="text-center"> ';
-                            echo $value->modifiedby;
-                            echo ' </td> ';
-
-                            //echo ' <td class="text-center"> ';
-                            //echo '<a class="btn btn-info btn-sm" href="index.php?link='.$linkDetails.'&id='.$value->id.'" role="button" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a> ';
-                            //echo ' </td> ';
-
 
                             echo ' </tr> ';
                         }
