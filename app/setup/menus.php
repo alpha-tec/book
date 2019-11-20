@@ -208,7 +208,7 @@
 
                             //echo '<button type="button" class="btn btn-sm btn-warning ml-2 " data-toggle="tooltip" data-placement="top" title="Mover para cima"><i class="fas fa-arrow-up"></i> </button>';
 
-                            echo '<button class="btn btn-sm btn-danger ml-2" name="delMenu" value="'.$value->id.'" type="submit" data-toggle="tooltip" data-placement="top" title="Apagar registro" onclick="return confirm(\' Tem certeza que quer APAGAR a página <'.$value->folder.' / '.$value->page_name.'> (#'.$value->id.') ?\');"><i class="fas fa-times"></i></button>';
+                            echo '<button class="btn btn-sm btn-danger ml-2" name="delMenu" value="'.$value->id.'" type="submit" data-toggle="tooltip" data-placement="top" title="Apagar registro" onclick="return confirm(\' Tem certeza que quer APAGAR a página #'.$value->id.' <'.$value->folder.' / '.$value->page_name.'> ?\');"><i class="fas fa-times"></i></button>';
 
                             echo ' </td> ';
 
