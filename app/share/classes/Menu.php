@@ -156,9 +156,13 @@ class Menu {
     
     public function update()
     {
-		$this->crud->setTablename($this->table);
+        $this->crud->setTablename($this->table);
+        
+        $label = NULL;
+        if(strlen($this->menu_label) > 0 )
+            $label = $this->menu_label;
 
-        $array = array('sequence'=> $this->sequence, 'num'=> $this->num, 'menu_label'=> $this->menu_label, 'icon'=> $this->icon, 'tooltip'=> $this->tooltip, 'folder'=> $this->folder, 'page_name'=> $this->page_name, 'active' => $this->active, 'modifiedby' => $this->save_id, );
+        $array = array('sequence'=> $this->sequence, 'num'=> $this->num, 'menu_label'=> $label, 'icon'=> $this->icon, 'tooltip'=> $this->tooltip, 'folder'=> $this->folder, 'page_name'=> $this->page_name, 'active' => $this->active, 'modifiedby' => $this->save_id, );
 
         $condition = array('id=' => $this->id);  
 
@@ -219,9 +223,9 @@ class Menu {
     
         $this->active = '';
         $this->created = '';
-        $this->createdby = 0;
+        $this->createdby = $this->save_id;
         $this->modified = '';
-        $this->modifiedby = 0;
+        $this->modifiedby = $this->save_id;
     }
 
 }
