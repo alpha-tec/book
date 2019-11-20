@@ -54,7 +54,7 @@
             
             <?php
                 if(isset($_POST['addMenu'])){
-
+                    $estrutura_menu->reset();
                     if(isset($_POST['inSequence']))
                         $estrutura_menu->setSequence($_POST['inSequence']);
                     if(isset($_POST['inNumber']))
@@ -83,6 +83,59 @@
                         echo "Erro na criação! Tente novamente.";
                         echo '</div>';
                     }
+                    unset($_POST['inSequence']);
+                    unset($_POST['inNumber']);
+                    unset($_POST['inFolder']);
+                    unset($_POST['inPage']);
+                    unset($_POST['addMenu']);
+                    unset($_POST['inLabel']);
+                    unset($_POST['inIcon']);
+                    unset($_POST['inTooltip']);
+                    unset($_POST['addMenu']);
+                }
+                if(isset($_POST['updateMenu'])){
+                    $estrutura_menu->reset();
+                    if(isset($_POST['inId']))
+                        $estrutura_menu->setId($_POST['inId']);
+                    if(isset($_POST['inStatus']))
+                        $estrutura_menu->setActive($_POST['inStatus']);
+                    if(isset($_POST['inSequence']))
+                        $estrutura_menu->setSequence($_POST['inSequence']);
+                    if(isset($_POST['inNumber']))
+                        $estrutura_menu->setNum($_POST['inNumber']);
+                    if(isset($_POST['inFolder']))
+                        $estrutura_menu->setFolder($_POST['inFolder']);
+                    if(isset($_POST['inPage']))
+                        $estrutura_menu->setPageName($_POST['inPage']);
+                    if(isset($_POST['inLabel']))
+                        $estrutura_menu->setMenuLabel($_POST['inLabel']);
+                    if(isset($_POST['inIcon']))
+                        $estrutura_menu->setIcon($_POST['inIcon']);
+                    if(isset($_POST['inTooltip']))
+                        $estrutura_menu->setTooltip($_POST['inTooltip']);
+
+                    if($estrutura_menu->update() > 0){
+                        echo '<div class="alert alert-success alert-dismissible fade show text-left" role="alert">';
+                        echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                        echo "Novo item adicionado!";
+                        echo '</div>';
+                    }
+                    else
+                    {
+                        echo '<div class="alert alert-danger alert-dismissible fade show text-left" role="alert">';
+                        echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                        echo "Erro na criação! Tente novamente.";
+                        echo '</div>';
+                    }
+                    unset($_POST['inSequence']);
+                    unset($_POST['inNumber']);
+                    unset($_POST['inFolder']);
+                    unset($_POST['inPage']);
+                    unset($_POST['addMenu']);
+                    unset($_POST['inLabel']);
+                    unset($_POST['inIcon']);
+                    unset($_POST['inTooltip']);
+                    unset($_POST['updateMenu']);
                 }
                 if(isset($_POST['delMenu'])){
                     $estrutura_menu->setId($_POST['delMenu']);
@@ -100,7 +153,7 @@
                         echo "Erro na remoção! Tente novamente.";
                         echo '</div>';
                     }
-
+                    unset($_POST['delMenu']);
                 }
 
             ?>
@@ -350,7 +403,7 @@
 
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-warning"><i class="fas fa-times" aria-hidden="true"></i> Cancelar</button>
-                    <button name="editMenu" type="submit" class="btn btn-primary ml-3 md-3" value="create" ><i class="fas fa-check" aria-hidden="true"></i> Salvar</button>
+                    <button name="updateMenu" type="submit" class="btn btn-primary ml-3 md-3" value="create" ><i class="fas fa-check" aria-hidden="true"></i> Salvar</button>
                 </div>
 
             </form>
