@@ -148,11 +148,11 @@
 
                             echo ' <span title="Editar Perfil" data-toggle="tooltip" data-placement="top"><button type="button" class="btn btn-sm btn-info " aria-hidden="true" data-toggle="modal" data-target="#editProfile" data-whateverid="'.$value->id.'" data-whateverstatus="'.$value->active.'" data-whateverprofile="'.$value->fullname.'" data-whatevershortname="'.$value->name.'" ><i class="fas fa-edit"></i> </button></span> ';
                             
-                            echo '<span title="Editar Menus" data-toggle="tooltip" data-placement="top"><a class="btn btn-sm btn-secondary ml-2" href="index.php?link='.$linkProfileMenus.'&id='.$value->id.'" target="_blank"><i class="fas fa-bars"></i></a></span>';
+                            echo '<span title="Editar Menus" data-toggle="tooltip" data-placement="top"><a class="btn btn-sm btn-secondary ml-2" href="index.php?link='.$linkProfileMenus.'&id='.$value->id.'" ><i class="fas fa-bars"></i></a></span>';
 
                             //echo '<button type="button" class="btn btn-sm btn-danger ml-2 " data-toggle="tooltip" data-placement="top" title="Desativar este perfil"> </button>';
 
-                            echo '<button class="btn btn-sm btn-danger ml-2" name="delProfile" value="'.$value->id.'" type="submit" data-toggle="tooltip" data-placement="top" title="Apagar perfil" onclick="return confirm(\' Tem certeza que quer APAGAR o perfil <'.$value->fullname.'> (#'.$value->id.') ?\');"><i class="fas fa-times"></i></button>';
+                            echo '<button class="btn btn-sm btn-danger ml-2" name="delProfile" value="'.$value->id.'" type="submit" data-toggle="tooltip" data-placement="top" title="Apagar perfil" onclick="return confirm(\' Tem certeza que quer APAGAR o perfil #'.$value->id.' <'.$value->fullname.'> ?\');"><i class="fas fa-times"></i></button>';
 
                             echo ' </td> ';
 
