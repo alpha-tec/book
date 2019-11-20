@@ -88,7 +88,6 @@
                     unset($_POST['inNumber']);
                     unset($_POST['inFolder']);
                     unset($_POST['inPage']);
-                    unset($_POST['addMenu']);
                     unset($_POST['inLabel']);
                     unset($_POST['inIcon']);
                     unset($_POST['inTooltip']);
@@ -118,21 +117,22 @@
                     if($estrutura_menu->update() > 0){
                         echo '<div class="alert alert-success alert-dismissible fade show text-left" role="alert">';
                         echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
-                        echo "Novo item adicionado!";
+                        echo "Item <b>#{$_POST['inId']}</b> foi atualizado!";
                         echo '</div>';
                     }
                     else
                     {
                         echo '<div class="alert alert-danger alert-dismissible fade show text-left" role="alert">';
                         echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
-                        echo "Erro na criação! Tente novamente.";
+                        echo "Erro na atualização! Tente novamente.";
                         echo '</div>';
                     }
+                    unset($_POST['inId']);
+                    unset($_POST['inStatus']);
                     unset($_POST['inSequence']);
                     unset($_POST['inNumber']);
                     unset($_POST['inFolder']);
                     unset($_POST['inPage']);
-                    unset($_POST['addMenu']);
                     unset($_POST['inLabel']);
                     unset($_POST['inIcon']);
                     unset($_POST['inTooltip']);
