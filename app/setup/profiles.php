@@ -42,23 +42,13 @@
             <hr class="my-3">
             <?php
                 if(isset($_POST['addProfile'])){
+                    $estrutura_perfil->reset();
+                    if(isset($_POST['inProfile']))
+                        $estrutura_menu->setFullname($_POST['inProfile']);
+                    if(isset($_POST['inShortName']))
+                        $estrutura_menu->setName($_POST['inShortName']);
 
-                    if(isset($_POST['inSequence']))
-                        $estrutura_menu->setSequence($_POST['inSequence']);
-                    if(isset($_POST['inNumber']))
-                        $estrutura_menu->setNum($_POST['inNumber']);
-                    if(isset($_POST['inFolder']))
-                        $estrutura_menu->setFolder($_POST['inFolder']);
-                    if(isset($_POST['inPage']))
-                        $estrutura_menu->setPageName($_POST['inPage']);
-                    if(isset($_POST['inMenu']))
-                        $estrutura_menu->setMenuLabel($_POST['inMenu']);
-                    if(isset($_POST['inIcon']))
-                        $estrutura_menu->setIcon($_POST['inIcon']);
-                    if(isset($_POST['inTooltip']))
-                        $estrutura_menu->setTooltip($_POST['inTooltip']);
-
-                    if($estrutura_menu->insert() > 0){
+                    if($estrutura_perfil->insert() > 0){
                         echo '<div class="alert alert-success alert-dismissible fade show text-left" role="alert">';
                         echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
                         echo "Novo item adicionado!";
@@ -71,14 +61,47 @@
                         echo "Erro na criação! Tente novamente.";
                         echo '</div>';
                     }
+                    unset($_POST['inProfile']);
+                    unset($_POST['inShortName']);
+                    unset($_POST['addProfile']);
                 }
-                if(isset($_POST['delMenu'])){
-                    $estrutura_menu->setId($_POST['delMenu']);
-                    
-                    if($estrutura_menu->delete() > 0){
+                if(isset($_POST['updateProfile'])){
+                    $estrutura_perfil->reset();
+                    if(isset($_POST['inId']))
+                        $estrutura_perfil->setId($_POST['inId']);
+                    if(isset($_POST['inStatus']))
+                        $estrutura_perfil->setActive($_POST['inStatus']);
+                    if(isset($_POST['inProfile']))
+                        $estrutura_perfil->setFullname($_POST['inProfile']);
+                    if(isset($_POST['inShortName']))
+                        $estrutura_perfil->setName($_POST['inShortName']);
+
+                    if($estrutura_perfil->update() > 0){
                         echo '<div class="alert alert-success alert-dismissible fade show text-left" role="alert">';
                         echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
-                        echo "Item foi apagado com sucesso!";
+                        echo "Item <b>#{$_POST['inId']}</b> foi atualizado!";
+                        echo '</div>';
+                    }
+                    else
+                    {
+                        echo '<div class="alert alert-danger alert-dismissible fade show text-left" role="alert">';
+                        echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                        echo "Erro na atualização! Tente novamente.";
+                        echo '</div>';
+                    }
+                    unset($_POST['inId']);
+                    unset($_POST['inStatus']);
+                    unset($_POST['inProfile']);
+                    unset($_POST['inShortName']);
+                    unset($_POST['updateProfile']);
+                }
+                if(isset($_POST['delProfile'])){
+                    $estrutura_perfil->setId($_POST['delProfile']);
+                    
+                    if($estrutura_perfil->delete() > 0){
+                        echo '<div class="alert alert-success alert-dismissible fade show text-left" role="alert">';
+                        echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                        echo "Item #{$_POST['delProfile']} foi apagado com sucesso!";
                         echo '</div>';
                     }
                     else
@@ -88,9 +111,8 @@
                         echo "Erro na remoção! Tente novamente.";
                         echo '</div>';
                     }
-
+                    unset($_POST['delProfile']);
                 }
-
             ?>
             <table id="example" class="table table-sm table-striped table-bordered" style="width:100%" > 
                 <thead class="thead-dark">
@@ -98,8 +120,8 @@
                         <th class="text-center">#</th>
                         <th class="text-center">ID</th>
                         <th class="text-center">Ação</th>
+                        <th class="text-center">Abreviação</th>
                         <th class="text-center">Nome</th>
-                        <th class="text-center">Nome Completo</th>
                         <th class="text-center">Ativo</th>
                         <th class="text-center">Criado</th>
                         <th class="text-center">Modificado</th>
@@ -252,7 +274,7 @@
 
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-warning"><i class="fas fa-times" aria-hidden="true"></i> Cancelar</button>
-                    <button name="editProfile" type="submit" class="btn btn-primary ml-3 md-3" value="create" ><i class="fas fa-check" aria-hidden="true"></i> Salvar</button>
+                    <button name="updateProfile" type="submit" class="btn btn-primary ml-3 md-3" value="create" ><i class="fas fa-check" aria-hidden="true"></i> Salvar</button>
                 </div>
 
             </form>
