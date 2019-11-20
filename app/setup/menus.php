@@ -38,7 +38,8 @@
                         <option value=" 1 " >Todos </option>
                         <option value=" num in (0, 1)" >Somente Menus </option>
                         <option value=" num>2 AND CHAR_LENGTH(menu_label)>1 " >Somente Submenu </option>
-                        <option value=" num>2 AND menu_label IS NULL " >Somente Páginas </option>
+                        <option value=" num>2 " >Todas as Páginas </option>
+                        <option value=" num>2 AND menu_label IS NULL " >Páginas sem Menu </option>
                     </select>
                 </div>
 
