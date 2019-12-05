@@ -162,7 +162,7 @@
 
                         <div class="form-group-material">
                             <!--<label class="form-control-label">Senha</label> -->
-                            <input id="login-pwd" name="upasswd" type="password" data-msg="Entre com a senha" class="input-material" value="" auto-complete="off" required>
+                            <input id="login-pwd" name="upasswd" type="password" data-msg="Entre com a senha" class="input-material" value="" auto-complete="new-password" required>
                             <label for="login-pwd" class="label-material">Senha</label>
                         </div>
                         <!--
