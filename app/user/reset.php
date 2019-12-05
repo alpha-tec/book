@@ -20,7 +20,7 @@
 
 <section>
    <div class="container-fluid " id="div_view">
-      <form class="form form-validate"  method="post" action="">
+      <form class="form form-validate"  method="post" action="" autocomplete="off">
 
          <div class="row " style="width: 100%;">   
             <div class="col-md-6">
@@ -31,12 +31,12 @@
 
                             if( strlen($_POST['uPwd1']) > 5 ){
 
-                                if( $_POST['uPwd1'] == $_POST['uPwd2'] ){
+                                if( $_POST['pwd1'] == $_POST['pwd2'] ){
 
-                                    $acesso->setPassword($_POST['uPwd1']);
+                                    $acesso->setPassword($_POST['pwd1']);
                                     $acesso->setLogin($lista->login);
                                     $resultado = $acesso->passwordUpdate();
-                                    $_SESSION['upaswd'] = $_POST['uPwd1'];
+                                    $_SESSION['upaswd'] = $_POST['pwd1'];
                                     if($resultado){
                                        echo "<div class='alert alert-info alert-dismissible fade show text-left' role='alert'>";
                                        echo "<button type='button' class='close' data-dismiss='alert'>&times;</button>";
@@ -56,8 +56,8 @@
                                 echo "</div>";                                
                             }
                             unset($_POST['update']);
-                            unset($_POST['uPwd1']);
-                            unset($_POST['uPwd2']);
+                            unset($_POST['pwd1']);
+                            unset($_POST['pwd2']);
                         }
                      ?>
                      <div class="row">
@@ -72,17 +72,17 @@
 
                         <div class="form-group col-sm-12">
                            <label class="form-control-label">Login</label>
-                           <input name="login" type="text" readonly data-msg="" class="form-control form-control-sm" value="<?php echo $lista->login;?>" readonly >
+                           <input name="plogin" type="text" readonly data-msg="" class="form-control form-control-sm" value="<?php echo $lista->login;?>" readonly >
                         </div>
 
                         <div class="form-group col-sm-12">
                            <label class="form-control-label" >Nova Senha</label>
-                           <input name="uPwd1" type="password" data-msg="Por favor entre com a Nova Senha" class="form-control form-control-sm" value="" autocomplete="off" required >
+                           <input name="pwd1" type="password" data-msg="Por favor entre com a Nova Senha" class="form-control form-control-sm" value="" autocomplete="new-password" required >
                         </div>
 
                         <div class="form-group col-sm-12 mb-3">
                            <label class="form-control-label" >Confirme Nova Senha</label>
-                           <input name="uPwd2" type="password" data-msg="Por favor confirme a Nova Senha" class="form-control form-control-sm" value="" autocomplete="off" required >
+                           <input name="pwd2" type="password" data-msg="Por favor confirme a Nova Senha" class="form-control form-control-sm" value="" autocomplete="new-password" required >
                         </div>
 
                         <div class="col-12 mt-1">
