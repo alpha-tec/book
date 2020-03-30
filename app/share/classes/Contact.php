@@ -1,6 +1,6 @@
 <?php 
 /**
- * Description of Contacts class
+ * Description: Contacts class
  *
  * author: Daniel Yamada
  * 
@@ -13,13 +13,12 @@ require_once "Crud.php";
 class Contact {
 	private $pdo;
 	private $crud;  
-	protected $table = 'ialbooks.contacts';
 	private static $contact;  
+
+	protected $table = 'ial360.contacts';
 	protected $save_id=0;
 
-	//table contacts
 	protected $id;
-	protected $user_id=0;
 	protected $address_id=0;
 	protected $name;
 	protected $email;
@@ -29,13 +28,12 @@ class Contact {
 	protected $phone='';
 	protected $mobile='';
 	protected $rg='';
-	protected $rg_emissor='';
+	protected $rg_issued_by='';
+	protected $rg_issued_date='';
 	protected $cpf='';
 	protected $marital_status='';
 	protected $deceased='N';
-
-	protected $address_number='';
-	protected $address_complement='';
+	protected $citizenship='';
 
 	protected $active='Y';
 	protected $created;
@@ -49,7 +47,30 @@ class Contact {
 	}  
 
 	public static function createTable(){
-		$sql = "";
+		$sql = "CREATE TABLE `contacts` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`user_id` int(11) NOT NULL,
+			`address_id` int(11) DEFAULT '0',
+			`name` varchar(255) DEFAULT NULL,
+			`email` varchar(200) DEFAULT NULL,
+			`gender` char(1) DEFAULT NULL,
+			`birthdate` date DEFAULT NULL,
+			`phone` varchar(255) DEFAULT NULL,
+			`mobile` varchar(255) DEFAULT NULL,
+			`rg` varchar(45) DEFAULT NULL,
+			`rg_issued_by` varchar(255) DEFAULT NULL,
+			`rg_issued_date` date DEFAULT NULL,
+			`cpf` varchar(45) DEFAULT NULL,
+			`marital_status` char(1) DEFAULT NULL,
+			`deceased` char(1) NOT NULL DEFAULT 'N',
+			`citizenship` varchar(100) DEFAULT NULL,
+			`active` char(1) NOT NULL DEFAULT 'Y',
+			`created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			`createdby` int(11) NOT NULL DEFAULT '0',
+			`modified` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+			`modifiedby` int(11) NOT NULL DEFAULT '0',
+			PRIMARY KEY (`id`)
+		   ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8";
 	}
 
    	public static function getInstance(){  
@@ -67,18 +88,11 @@ class Contact {
         $this->save_id = $var;
     }
 
-	//TABLE contacts
 	public function setId( $var ) {
 		$this->id = $var;
 	}
 	public function getId() {
 		return $this->id;
-	}
-	public function setUserId( $var ) {
-		$this->user_id = $var;
-	}
-	public function getUserId() {
-		return $this->profile_id;
 	}
 	public function setAddressId( $var ){
 		$this->address_id = $var;
@@ -87,7 +101,7 @@ class Contact {
 		return $this->address_id;
 	}
 	public function setName( $var ) {
-		$this->name = mb_convert_case($var, MB_CASE_TITLE, "UTF-8");
+		$this->name = mb_strtoupper($var, "UTF-8");
 	}
 	public function getName() {
 		return $this->name;
@@ -123,16 +137,22 @@ class Contact {
 		return $this->mobile;
 	}
 	public function setRG( $var ) {
-		$this->rg = $var;
+		$this->rg = mb_strtoupper($var, "UTF-8");
 	}
 	public function getRG() {
 		return $this->rg;
 	}
-	public function setRGEmissor( $var ) {
-		$this->rg_emissor = $var;
+	public function setRGIssuedBy( $var ) {
+		$this->rg_issue_by = mb_strtoupper($var, "UTF-8");
 	}
-	public function getRGEmissor() {
-		return $this->rg_emissor;
+	public function getRGIssuedBy() {
+		return $this->rg_issue_by;
+	}
+	public function setRGIssuedDate( $var ) {
+		$this->rg_issue_date = mb_strtoupper($var, "UTF-8");
+	}
+	public function getRGIssuedDate() {
+		return $this->rg_issue_date;
 	}
 	public function setCPF( $var ) {
 		$this->cpf = $var;
@@ -152,18 +172,11 @@ class Contact {
 	public function getDeceased() {
 		return $this->deceased;
 	}
-
-	public function setAddressNumber( $var ) {
-		$this->address_number = $var;
+	public function setCitizenship( $var ) {
+		$this->citzenship = mb_strtoupper($var, "UTF-8");
 	}
-	public function getAddressNumber() {
-		return $this->address_number;
-	}
-	public function setAddressComplement( $var ) {
-		$this->address_complement = $var;
-	}
-	public function getAddressComplement() {
-		return $this->address_complement;
+	public function getCitizenship() {
+		return $this->citzenship;
 	}
 
 	public function setActive( $var ) {
@@ -198,68 +211,32 @@ class Contact {
 	}
 
 	
-	public function insertQuick()
-	{
-		$this->crud->setTablename($this->table);
-
-		$array = array('user_id'=> $this->user_id, 'name'=> $this->name, 'email'=> $this->email, 'createdby'=> $this->save_id, );
-
-		$id = array();
-        $result = $this->crud->insert($array);
-
-		if($result){
-            $id = $this->selectGeneric("SELECT LAST_INSERT_ID() as lastId", NULL, NULL);
-		}
-
-		if(count($id)> 0){
-			$this->contact_id = $id['lastId'];
-			return ['id'=> $id['lastId'], 'name'=> $this->name,];
-		}
-		
-		return ['id'=> 0, 'name'=> $this->name,];
-	}
-	 
 	public function insert()
 	{
 		$this->crud->setTablename($this->table);
-
-		$array = array('user_id'=> $this->user_id, 'address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_emissor'=> $this->rg_emissor, 'cpf'=> $this->cpf, 'marital_status'=> $this->marital_status, 'deceased'=>$this->deceased, 'address_number'=> $this->address_number, 'address_complement'=> $this->address_complement, 'active'=> $this->active, 'createdby'=> $this->save_id, );
-		
-		$id = array();
+		$array = array('address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_issued_by'=> $this->rg_issued_by, 'rg_issued_date'=> $this->rg_issued_date, 'cpf'=> $this->cpf, 'marital_status'=> $this->marital_status, 'deceased'=>$this->deceased, 'citizenship'=> $this->citizenship, 'createdby'=> $this->save_id, );
         $result = $this->crud->insert($array);
-
 		if($result){
-            $id = $this->selectGeneric("SELECT LAST_INSERT_ID() as lastId", NULL, NULL);
+			$id = $this->selectGeneric("SELECT LAST_INSERT_ID() as lastId", NULL, NULL);
+			return $id['lastId'];
 		}
-
-		if(count($id)> 0){
-			$this->contact_id = $id['lastId'];
-			return ['id'=> $id['lastId'], 'name'=> $this->name,];
-		}
-		
-		return ['id'=> 0, 'name'=> $this->name,];
+		return 0;
 	}
 	   
 	public function update()
 	{
 		$this->crud->setTablename($this->table);
-
-		$array = array('user_id'=> $this->user_id, 'address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_emissor'=> $this->rg_emissor, 'cpf'=> $this->cpf, 'marital_status'=> $this->marital_status, 'address_number'=> $this->address_number, 'address_complement'=> $this->address_complement, 'active'=> $this->active, 'modifiedby'=> $this->save_id, );
-		  
+		$array = array('address_id'=> $this->address_id, 'name'=> $this->name, 'email'=> $this->email, 'gender'=> $this->gender, 'birthdate'=> $this->birthdate, 'phone'=> $this->phone, 'mobile'=> $this->mobile, 'rg'=> $this->rg, 'rg_issued_by'=> $this->rg_issued_by, 'rg_issued_date'=> $this->rg_issued_date, 'cpf'=> $this->cpf, 'marital_status'=> $this->marital_status, 'deceased'=>$this->deceased, 'citizenship'=> $this->citizenship, 'active'=> $this->active, 'modifiedby'=> $this->save_id, );
 		$arrayCond = array('id=' => $this->id);
-	  
       	return $this->crud->update($array, $arrayCond); 
 	}
 	   
 	public function selectAll($cond=NULL)
 	{
 		$conditions = "";
-
 		if (!empty($cond))
 			$conditions = "WHERE {$cond}";
-
 		$sql = "SELECT * FROM {$this->table} {$conditions} ";
-		
 		return $this->crud->getSQLGeneric($sql, NULL, TRUE);
    	}
 
@@ -268,16 +245,12 @@ class Contact {
 		return $this->crud->getSQLGeneric($sql, $parameters, $fetch);
    	}
 
-
 	public function select($c=NULL)
 	{
 		$condition = "";
-
 		if (!empty($c))
 			$condition = "WHERE {$c}";
-
 		$sql = "SELECT * FROM {$this->table} {$condition} LIMIT 1 ";
-		
 		return $this->crud->getSQLGeneric($sql, NULL, TRUE);
 	}
 

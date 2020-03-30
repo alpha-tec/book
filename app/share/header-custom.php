@@ -61,7 +61,7 @@
 <meta name="theme-color" content="#ffffff">
 
 <style type="text/css">
-    @media screen {
+    @media screen { 
         #printSection {
             display: none;
         }

@@ -153,11 +153,6 @@
                     <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2" >
 
                         <div class="form-group has-danger text-left">
-                            <label for="inName" class="form-control-label">Nome</label>
-                            <input name="inName" id="inName" type="text" data-msg="Por favor entre com o nome" class="form-control form-control-sm " value="" required>
-                        </div>
-
-                        <div class="form-group has-danger text-left">
                             <label for="inEmail" class="form-control-label">E-mail</label>
                             <input name="inEmail" id="inEmail" type="text" data-msg="Por favor entre com o email" class="form-control form-control-sm" value="" required>
                         </div>

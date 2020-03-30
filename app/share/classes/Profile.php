@@ -1,8 +1,9 @@
 <?php
 /**
- * Description of Profile class
+ * Description: Profile class
  *
  * author: Daniel Yamada
+ * 
  */
 
 require_once VCLASSES."Connection.php";  
@@ -14,13 +15,13 @@ class Profile {
     private $crud;
     private static $profile;  
  
-    protected $table = 'ialbooks.sys_profiles';
+    protected $table = 'ial360.sys_profiles';
     protected $save_id=0;
 
     //table columns
     protected $id;
     protected $name;
-    protected $fullname;
+    protected $description;
 
     protected $active='Y';
     protected $created;
@@ -31,6 +32,7 @@ class Profile {
     public function setSaveId( $var ) {
         $this->save_id = $var;
     }
+
     public function setId( $var ) {
         $this->id = $var;
     }
@@ -43,12 +45,13 @@ class Profile {
     public function getName() {
         return $this->name;
     }
-    public function setFullName( $var ) {
-        $this->fullname = $var;
+    public function setDescription( $var ) {
+        $this->description = $var;
     }
-    public function getFullName() {
-        return $this->fullname;
+    public function getDescription() {
+        return $this->description;
     }
+
     public function setActive( $var ) {
         $this->active = $var;
     }
@@ -99,56 +102,53 @@ class Profile {
    
     public static function createTable()
     {
-        $sql = "";
+        $sql = "CREATE TABLE `sys_profiles` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `name` varchar(50) DEFAULT NULL,
+                `description` varchar(255) DEFAULT NULL,
+                `active` char(1) NOT NULL DEFAULT 'Y',
+                `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                `createdby` int(11) NOT NULL DEFAULT '0',
+                `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+                `modifiedby` int(11) DEFAULT '0',
+                PRIMARY KEY (`id`)
+                ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8";
     }
 
     public function insert()
     {
 		$this->crud->setTablename($this->table);
-
-        $array = array('name'=> $this->name, 'fullname'=> $this->fullname, 'createdby' => $this->save_id, );
-
-        $id = 0;
+        $array = array('name'=> $this->name, 'description'=> $this->description, 'createdby' => $this->save_id, );
         $result = $this->crud->insert($array);
-
         if($result){
             $id = $this->selectGeneric("SELECT LAST_INSERT_ID() as lastId", NULL, NULL);
             return $id['lastId'];
         }
-
         return 0;
     }
     
     public function update()
     {
 		$this->crud->setTablename($this->table);
-
-        $array = array('name'=> $this->name, 'fullname'=> $this->fullname, 'active' => $this->active, 'modifiedby' => $this->save_id, );
-
+        $array = array('name'=> $this->name, 'description'=> $this->description, 'active' => $this->active, 'modifiedby' => $this->save_id, );
         $condition = array('id=' => $this->id);  
-
         return $this->crud->update($array, $condition); 
     }
 
     public function delete()
     {
 		$this->crud->setTablename($this->table);
-
         if($this->id == 0)
             return 0;
-
         $condition = array('id=' => $this->id, );
-  
         return $this->crud->delete($condition);
     }
      
     public function selectAll($c=NULL)
     {
         $conditions = "";
-  
         if (!empty($c))
            $conditions = "WHERE {$c}";
-  
         $sql = "SELECT * FROM {$this->table} {$conditions} ";
         return $this->crud->getSQLGeneric($sql, NULL, TRUE);
     }
@@ -156,12 +156,9 @@ class Profile {
     public function select($c=NULL)
     {
         $conditions = "";
-  
         if (!empty($c))
            $conditions = "WHERE {$c}";
-        
         $sql = "SELECT * FROM {$this->table} {$conditions} LIMIT 1";
-        
         return $this->crud->getSQLGeneric($sql, NULL, TRUE);
     }
 
@@ -170,12 +167,11 @@ class Profile {
         return $this->crud->getSQLGeneric($sql, $parameters, $fetch);
     }
     
-    
     public function reset()
     {
         $this->id = 0;
         $this->name = '';
-        $this->fullname = '';
+        $this->description = '';
     
         $this->active = '';
         $this->created = '';
